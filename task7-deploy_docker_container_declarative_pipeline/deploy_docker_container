@@ -1,0 +1,20 @@
+pipeline {
+    environment {
+        registry = "raja7159/webapp"
+        registryCredential = 'docker-hub'
+        dockerImage = 'raja7159/webapp'
+  }
+    agent any
+    stages {
+        stage('Pull Image') {
+            steps{
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        sh 'docker run -it -d -p 80:80 raja7159/webapp /bin/bash'
+                    }
+                }
+            }
+        }
+    }
+}
+                    
